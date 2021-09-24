@@ -4,13 +4,14 @@ using System.Text;
 
 namespace CSharp
 {
-	internal class Address
+	[Serializable]
+	public class Address
 	{
-		public string Country { get; private set; }
-		public string District { get; private set; }
-		public string City { get; private set; }
-		public string Street { get; private set; }
-		public int Housenumber { get; private set; }
+		public string Country { get;  set; }
+		public string District { get;  set; }
+		public string City { get;  set; }
+		public string Street { get;  set; }
+		public int Housenumber { get;  set; }
 
 		public Address()
 		{

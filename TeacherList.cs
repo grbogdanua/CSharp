@@ -4,21 +4,24 @@ using System.Text;
 
 namespace CSharp
 {
-	class TeacherList
+
+	public class TeacherList
 	{
 		public List<Teacher> Teachers { get; private set; }
 
 		public TeacherList(List<Teacher> teachers)
 		{
+			Teachers = new List<Teacher> { };
 			Teachers.AddRange(teachers);
 		}
 		public TeacherList(Teacher teacher)
 		{
+			Teachers = new List<Teacher> { };
 			Teachers.Add(teacher);
 		}
 		public TeacherList()
 		{
-			
+			Teachers = new List<Teacher> { };
 		}
 
 		public void AddTeacher(Teacher teacher)
@@ -27,8 +30,7 @@ namespace CSharp
 		}
 		public void AddTeacher()
 		{
-			Teacher teacher = new Teacher();
-			Teachers.Add(teacher);
+			Teachers.Add(new Teacher());
 		}
 		public void SortTechers()
 		{
@@ -41,21 +43,21 @@ namespace CSharp
 				teacher.Getinfo();
 			}
 		}
-		public void Serch(Teacher currentteacher)
+		public void Serch(string teachersurname)
 		{
 			foreach (Teacher teacher in Teachers)
 			{
-				if(teacher == currentteacher)
+				if(teacher.Surname == teachersurname)
 				{
 					teacher.Getinfo();
 				}
 			}
 		}
-		public void WorkWithTeacher(Teacher currentteacher)
+		public void WorkWithTeacher(string teachersurname)
 		{
 			foreach (Teacher teacher in Teachers)
 			{
-				if (teacher == currentteacher)
+				if (teacher.Surname == teachersurname)
 				{
 					teacher.WorkWith();
 				}

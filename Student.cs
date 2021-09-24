@@ -4,16 +4,17 @@ using System.Text;
 
 namespace CSharp
 {
-	class Student: Human
+	[Serializable]
+	public class Student: Human
 	{
-		public Mark Grade { get; private set; }
+		public Mark Grade { get;  set; }
 
 		public Student(string name, string surname, int age, Address address, Mark mark)
 		{
 			Name = name;
 			Surname = surname;
 			Age = age;
-			HumanAdress = address;
+			HumanAddress = address;
 			Grade = mark;
 		}
 		public Student(string surname)
@@ -22,12 +23,11 @@ namespace CSharp
 		}
 		public Student()
 		{
-			Console.Write("Name: ");
-			Name = Console.ReadLine();
+			Grade = new Mark();
+		}
 
-			Console.Write("Surname: ");
-			Surname = Console.ReadLine();
-
+		private int GenerateAge()
+		{
 			Console.Write("Age: ");
 			var enteredAge = Console.ReadLine();
 			int num;
@@ -36,19 +36,34 @@ namespace CSharp
 				Console.Write("Age isn`t number. Try again. Age: ");
 				enteredAge = Console.ReadLine();
 			}
-			Age = num;
-
-			Console.WriteLine("Address:");
-			HumanAdress = new Address();
-
-			Grade = new Mark();
+			return(num);
 		}
-		public void ChengeHuman()
+
+		public void ModifyStudent()
 		{
 			bool cycle = true;
 			while (cycle)
 			{
-
+				Console.WriteLine("1 <- New Marks\n2 <- Change Address\n3 <- Change age\n4 <- return");
+				var entered = Console.ReadLine();
+				switch (entered)
+				{
+					case "1":
+						Grade = new Mark();
+						break;
+					case "2":
+						HumanAddress = new Address();
+						break;
+					case "3":
+						Age = GenerateAge();
+						break;
+					case "4":
+						cycle = false;
+						break;
+					default:
+						Console.WriteLine("You wrote something wrong");
+						break;
+				}
 			}
 		}
 		public void Getinfo()

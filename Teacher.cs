@@ -4,7 +4,8 @@ using System.Text;
 
 namespace CSharp
 {
-	class Teacher: Human
+	[Serializable]
+	public class Teacher: Human
 	{
 		public List<Student> Students { get; private set; }
 
@@ -13,7 +14,7 @@ namespace CSharp
 			Name = name;
 			Surname = surname;
 			Age = age;
-			HumanAdress = address;
+			HumanAddress = address;
 		}
 		public Teacher(string surname)
 		{
@@ -21,24 +22,7 @@ namespace CSharp
 		}
 		public Teacher()
 		{
-			Console.Write("Name: ");
-			Name = Console.ReadLine();
-
-			Console.Write("Surname: ");
-			Surname = Console.ReadLine();
-
-			Console.Write("Age: ");
-			var enteredAge = Console.ReadLine();
-			int num;
-			while (!int.TryParse(enteredAge, out num))
-			{
-				Console.Write("Age isn`t number. Try again. Age: ");
-				enteredAge = Console.ReadLine();
-			}
-			Age = num;
-
-			Console.WriteLine("Address:");
-			HumanAdress = new Address();
+			Students = new List<Student> { };
 		}
 		public void AddStudent(Student student)
 		{
@@ -46,26 +30,25 @@ namespace CSharp
 		}
 		public void AddStudent()
 		{
-			Student student = new Student();
-			Students.Add(student);
+			Students.Add(new Student());
 		}
-		public void SerchStudent(Student currentstudent)
+		public void SerchStudent(string surname)
 		{
 			foreach(Student student in Students)
 			{
-				if(student == currentstudent)
+				if(student.Surname == surname)
 				{
 					student.Getinfo();
 				}
 			}
 		}
-		public void ChengeStudent(Student currentstudent)
+		public void ModifyStudent(string surname)
 		{
 			foreach (Student student in Students)
 			{
-				if (student == currentstudent)
+				if (student.Surname == surname)
 				{
-					student.ChengeHuman();
+					student.ModifyStudent();
 				}
 			}
 		}
@@ -85,7 +68,7 @@ namespace CSharp
 			bool cycle = true;
 			while (cycle)
 			{
-				Console.WriteLine("1 <- add student\n2 <- serch student\n3 <- Chenge student\n4 <- Chenge Teacher`s address\n5 <- Stop");
+				Console.WriteLine("1 <- add student\n2 <- serch student\n3 <- Modify student\n4 <- Chenge Teacher`s address\n5 <- Stop");
 				var enterednumber = Console.ReadLine();
 				switch (enterednumber)
 				{
@@ -94,13 +77,14 @@ namespace CSharp
 						break;
 					case "2":
 						Console.Write("Students Sername please: ");
-						SerchStudent(new Student(Console.ReadLine()));
+						SerchStudent(Console.ReadLine());
 						break;
 					case "3":
 						Console.Write("Students Sername please: ");
-						ChengeStudent(new Student(Console.ReadLine()));
+						ModifyStudent(Console.ReadLine());
 						break;
 					case "4":
+						HumanAddress = new Address();
 						break;
 					case "5":
 						cycle = false;

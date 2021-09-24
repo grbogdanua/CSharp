@@ -4,18 +4,19 @@ using System.Text;
 
 namespace CSharp
 {
+	[Serializable]
 	public enum StudentTipe
 	{
-		excellent,
-		good,
-		bad,
-		stupid,
-		verystupid
+		Excellent,
+		Good,
+		Bad,
+		Stupid,
+		Verystupid
 	}
-	class Mark
+	public class Mark
 	{
 		public int[] Marks {  get;  set; }
-		public StudentTipe AverageMark { get; private set; }
+		public StudentTipe AverageMark { get;  set; }
 
 		public Mark(int[] marks)
 		{
@@ -44,7 +45,7 @@ namespace CSharp
 			}
 			AverageMark = Average(Marks);
 		}
-		private StudentTipe Average(int[] marks)
+		public StudentTipe Average(int[] marks)
 		{
 			int summ = 0;
 			int count = 0;
@@ -56,15 +57,15 @@ namespace CSharp
 			switch (summ / count)
 			{
 				case 5:
-					return (StudentTipe.excellent);
+					return (StudentTipe.Excellent);
 				case 4:
-					return (StudentTipe.good);
+					return (StudentTipe.Good);
 				case 3:
-					return (StudentTipe.bad);
+					return (StudentTipe.Bad);
 				case 2:
-					return (StudentTipe.stupid);
+					return (StudentTipe.Stupid);
 				default:
-					return (StudentTipe.verystupid);
+					return (StudentTipe.Verystupid);
 			}
 		}
 		public void GetInfo()

@@ -4,19 +4,20 @@ using System.Text;
 
 namespace CSharp
 {
-	class Human
+	[Serializable]
+	public class Human
 	{
 		public string Name { get; set; }
 		public string Surname { get; set; }
 		public int Age { get; set; }
-		public Address HumanAdress { get; set; }
+		public Address HumanAddress { get; set; }
 
 		public Human(string name, string surname, int age, Address address)
 		{
 			Name = name;
 			Surname = surname;
 			Age = age;
-			HumanAdress = address;
+			HumanAddress = address;
 		}
 		public Human()
 		{
@@ -37,25 +38,17 @@ namespace CSharp
 			Age = num;
 
 			Console.WriteLine("Address:");
-			HumanAdress = new Address();
+			HumanAddress = new Address();
 		}
 		public void GetInfo()
 		{
 			Console.WriteLine($"Name: {Name} Sername: {Surname} Age: {Age}");
 			Console.WriteLine("Address: ");
-			HumanAdress.GetInfo();
+			HumanAddress.GetInfo();
 		}
 		public static bool operator <(Human humanA, Human humanB)
 		{
 			return ((humanA.Surname.CompareTo(humanB.Surname)) < 0);
-		}
-		public static bool operator ==(Human humanA, Human humanB)
-		{
-			return ((humanA.Surname.CompareTo(humanB.Surname)) == 0);
-		}
-		public static bool operator !=(Human humanA, Human humanB)
-		{
-			return ((humanA.Surname.CompareTo(humanB.Surname)) != 0);
 		}
 		public static bool operator >(Human humanA, Human humanB)
 		{
